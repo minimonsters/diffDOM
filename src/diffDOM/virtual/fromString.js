@@ -42,7 +42,7 @@ function parseTag(tag) {
 
     let tagMatch = tag.match(/<\/?([^\s]+?)[/\s>]/)
     if (tagMatch) {
-        res.nodeName = tagMatch[1].toUpperCase()
+        res.nodeName = tagMatch[1]
         if (lookup[tagMatch[1].toLowerCase()] || tag.charAt(tag.length - 2) === '/') {
             res.voidElement = true
         }
