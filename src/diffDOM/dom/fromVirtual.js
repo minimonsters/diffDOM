@@ -7,13 +7,19 @@ export function objToNode(objNode, insideSvg, options) {
         node = options.document.createComment(objNode.data)
     } else {
         if (insideSvg) {
-            node = options.document.createElementNS('http://www.w3.org/2000/svg', objNode.nodeName)
+            if (objNode.nodeName === 'foreignObject') {
+                insideSvg = false;
+                node = options.document.createElementNS(objNode.nodeName)
+            } else {
+                node = options.document.createElementNS('http://www.w3.org/2000/svg', objNode.nodeName)
+            }
         } else if (objNode.nodeName.toLowerCase() === 'svg') {
             node = options.document.createElementNS('http://www.w3.org/2000/svg', 'svg')
             insideSvg = true
         } else {
             node = options.document.createElement(objNode.nodeName)
         }
+
         if (objNode.attributes) {
             Object.entries(objNode.attributes).forEach(([key, value]) => node.setAttribute(key, value))
         }
