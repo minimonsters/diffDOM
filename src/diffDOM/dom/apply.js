@@ -48,7 +48,7 @@ export function applyDiff(
                 return false
             }
             node.setAttribute(diff[options._const.name], diff[options._const.newValue])
-            if (node.nodeName === 'INPUT' && diff[options._const.name] === 'value') {
+            if (node.nodeName.toUpperCase() === 'INPUT' && diff[options._const.name] === 'value') {
                 node.value = diff[options._const.newValue]
             }
             break

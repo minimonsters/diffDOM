@@ -1,6 +1,10 @@
 export function nodeToObj(aNode, options = {}) {
     const objNode = {}
-    objNode.nodeName = aNode.nodeName
+    objNode.nodeName = aNode.localName || aNode.nodeName
+    /*if (aNode.localName != aNode.nodeName.toLowerCase())
+    {
+        console.log(`Diff: local:[${aNode.nodeName}] vs node:[${aNode.nodeName}]`)
+    }*/
     if (objNode.nodeName === '#text' || objNode.nodeName === '#comment') {
         objNode.data = aNode.data
     } else {
@@ -9,7 +13,7 @@ export function nodeToObj(aNode, options = {}) {
             const nodeArray = Array.prototype.slice.call(aNode.attributes)
             nodeArray.forEach(attribute => objNode.attributes[attribute.name] = attribute.value)
         }
-        if (objNode.nodeName === 'TEXTAREA') {
+        if (objNode.nodeName.toUpperCase() === 'TEXTAREA') {
             objNode.value = aNode.value
         } else if (aNode.childNodes && aNode.childNodes.length > 0) {
             objNode.childNodes = []

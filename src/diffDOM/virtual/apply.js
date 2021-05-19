@@ -60,7 +60,7 @@ function applyVirtualDiff(
                 node.checked = true
             } else if (diff[options._const.name] === 'selected') {
                 node.selected = true
-            } else if (node.nodeName === 'INPUT' && diff[options._const.name] === 'value') {
+            } else if (node.nodeName.toUpperCase() === 'INPUT' && diff[options._const.name] === 'value') {
                 node.value = diff[options._const.value]
             }
 
@@ -80,7 +80,7 @@ function applyVirtualDiff(
                 node.checked = false
             } else if (diff[options._const.name] === 'selected') {
                 delete node.selected
-            } else if (node.nodeName === 'INPUT' && diff[options._const.name] === 'value') {
+            } else if (node.nodeName.toUpperCase() === 'INPUT' && diff[options._const.name] === 'value') {
                 delete node.value
             }
 
@@ -203,7 +203,7 @@ function applyVirtualDiff(
             break
         case options._const.removeTextElement:
             parentNode.childNodes.splice(nodeIndex, 1)
-            if (parentNode.nodeName === 'TEXTAREA') {
+            if (parentNode.nodeName.toUpperCase() === 'TEXTAREA') {
                 delete parentNode.value
             }
             if (parentNode.subsets) {
@@ -244,7 +244,7 @@ function applyVirtualDiff(
             } else {
                 node.childNodes.splice(c, 0, newNode)
             }
-            if (node.nodeName === 'TEXTAREA') {
+            if (node.nodeName.toUpperCase() === 'TEXTAREA') {
                 node.value = diff[options._const.newValue]
             }
             if (node.subsets) {
