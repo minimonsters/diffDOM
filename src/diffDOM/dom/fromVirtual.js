@@ -9,7 +9,7 @@ export function objToNode(objNode, insideSvg, options) {
         if (insideSvg) {
             if (objNode.nodeName === 'foreignObject') {
                 insideSvg = false;
-                node = options.document.createElementNS(objNode.nodeName)
+                node = options.document.createElementNS(null, objNode.nodeName)
             } else {
                 node = options.document.createElementNS('http://www.w3.org/2000/svg', objNode.nodeName)
             }
